@@ -11,8 +11,8 @@ if [ -z $1 ]
 fi
 
 cd ~/$WORKSPACE
-source devel/setup.bash
 catkin init
 catkin build
+source devel/setup.bash
 
 
