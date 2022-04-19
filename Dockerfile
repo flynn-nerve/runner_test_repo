@@ -1,5 +1,5 @@
 # Use Melodic version 
-FROM ros:melodic
+FROM ros:melodic-ros-core-bionic
 
 # install bootstrap tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -14,9 +14,9 @@ RUN rosdep init && \
   rosdep update --rosdistro $ROS_DISTRO
 
 
-ARG PACKAGE_PATH=/opt/ros/runner_test_pkg
+ARG PACKAGE_PATH=/opt/ros/
 
-COPY ./runner_test_pkg  ${PACKAGE_PATH}/src
+COPY ./runner_test_pkg  ${PACKAGE_PATH}
 
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
     apt-get update && rosdep install -y \
