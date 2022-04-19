@@ -34,9 +34,9 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
     && rm -rf /var/lib/apt/lists/*
 
 
-
+WORKDIR ${WORKSPACE}
 RUN bash -c "catkin init"
 RUN bash -c "catkin build"
-RUN bash -c "source /deve/setup.bash"
+RUN bash -c "source /devel/setup.bash"
 
 
