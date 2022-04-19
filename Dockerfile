@@ -27,7 +27,7 @@ WORKDIR ${WORKSPACE}
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
     apt-get update && rosdep install -y \
       --from-paths \
-        runner_test_pkg \
+        /src/runner_test_pkg \
     && rm -rf /var/lib/apt/lists/*
 
 
