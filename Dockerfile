@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python-rosdep \
     python-rosinstall \
     python-vcstools \
+    python-catkin-tools \
     && rm -rf /var/lib/apt/lists/*
 
 # bootstrap rosdep
@@ -17,7 +18,7 @@ RUN rosdep init && \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-melodic-ros-base=1.4.1-0* \
     && rm -rf /var/lib/apt/lists/*
-    
+
 ARG WORKSPACE=/tmp/WORKSPACE/src
 WORKDIR ${WORKSPACE}
 COPY . ${WORKSPACE}
