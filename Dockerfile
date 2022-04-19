@@ -21,6 +21,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 ARG WORKSPACE=/tmp/WORKSPACE/
+
+WORKDIR ${WORKSPACE}
+RUN bash -c "source /opt/ros/melodic/setup.bash"
+RUN bash -c "catkin init"
+RUN bash -c "catkin build"
+RUN bash -c "source /devel/setup.bash"
+
+
 WORKDIR ${WORKSPACE}/src
 COPY . .
 
@@ -33,10 +41,6 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
         runner_test_pkg \
     && rm -rf /var/lib/apt/lists/*
 
-
-WORKDIR ${WORKSPACE}
-RUN bash -c "catkin init"
 RUN bash -c "catkin build"
 RUN bash -c "source /devel/setup.bash"
-
 
