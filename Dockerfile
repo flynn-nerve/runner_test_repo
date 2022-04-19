@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ARG WORKSPACE=/tmp/WORKSPACE/
 
+WORKDIR ${WORKSPACE}/src
 WORKDIR ${WORKSPACE}
 RUN bash -c "source /opt/ros/melodic/setup.bash"
 RUN bash -c "catkin init"
