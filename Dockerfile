@@ -26,7 +26,8 @@ ARG WORKSPACE=/tmp/WORKSPACE/
 WORKDIR ${WORKSPACE}/src
 WORKDIR ${WORKSPACE}
 RUN  . /opt/ros/$ROS_DISTRO/setup.sh
-RUN bash -c "source /devel/setup.bash"
+
+
 RUN bash -c "source /opt/ros/melodic/setup.bash"
 RUN bash -c "catkin init"
 RUN bash -c "catkin build"
