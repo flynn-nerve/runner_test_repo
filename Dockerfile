@@ -9,9 +9,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python-vcstools \
     && rm -rf /var/lib/apt/lists/*
 
-ARG WORKSPACE=/opt/ros/runner_test_pkg
+# bootstrap rosdep
+RUN rosdep init && \
+  rosdep update --rosdistro $ROS_DISTRO
 
-COPY ./runner_test_pkg  ${WORKSPACE}/src
+
+ARG PACKAGE_PATH=/opt/ros/runner_test_pkg
+
+COPY ./runner_test_pkg  ${PACKAGE_PATH}/src
 
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
     apt-get update && rosdep install -y \
@@ -19,5 +24,11 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
         /opt/ros/runner_test_pkg \
       --ignore-src \
     && rm -rf /var/lib/apt/lists/*
+
+ARG WORKSPACE=/tmp/WORKSPACE/src
+WORKDIR ${WORKSPACE}
+
+
+ENTRYPOINT ["setup.sh"]
 
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WORKSPACE=$1
+WORKSPACE=/tmp/WORKSPACE/src
 
 if [ -z $1 ]
   then
