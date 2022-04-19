@@ -1,5 +1,5 @@
 # Use Melodic version 
-FROM ros:melodic-ros-base
+FROM ros:melodic-ros-core-bionic
 
 # install bootstrap tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
