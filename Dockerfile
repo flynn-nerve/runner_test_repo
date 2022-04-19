@@ -9,11 +9,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python-vcstools \
     && rm -rf /var/lib/apt/lists/*
 
-# bootstrap rosdep
-RUN rosdep init && \
-  rosdep update --rosdistro $ROS_DISTRO
-
-
 ARG WORKSPACE=/opt/ros/runner_test_pkg
 
 COPY ./runner_test_pkg  ${WORKSPACE}/src
@@ -21,7 +16,7 @@ COPY ./runner_test_pkg  ${WORKSPACE}/src
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
     apt-get update && rosdep install -y \
       --from-paths \
-        /opt/ros/runner_test_pkg/src/talker \
+        /opt/ros/runner_test_pkg \
       --ignore-src \
     && rm -rf /var/lib/apt/lists/*
 
