@@ -16,17 +16,18 @@ RUN rosdep init && \
 
 ARG PACKAGE_PATH=/opt/ros/
 
-COPY ./runner_test_pkg  ${PACKAGE_PATH}
+
+ARG WORKSPACE=/tmp/WORKSPACE/src
+WORKDIR ${WORKSPACE}
+COPY . ${WORKSPACE}
 
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
     apt-get update && rosdep install -y \
       --from-paths \
-        /opt/ros/runner_test_pkg \
-      --ignore-src \
+        runner_test_pkg \
     && rm -rf /var/lib/apt/lists/*
 
-ARG WORKSPACE=/tmp/WORKSPACE/src
-WORKDIR ${WORKSPACE}
+
 
 RUN bash -c "catkin init"
 RUN bash -c "catkin build"
