@@ -21,7 +21,7 @@ COPY ./runner_test_pkg  ${WORKSPACE}/src
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
     apt-get update && rosdep install -y \
       --from-paths \
-        src/runner_test_pkg/src/talker \
+        /opt/ros/runner_test_pkg/src/talker \
       --ignore-src \
     && rm -rf /var/lib/apt/lists/*
 
