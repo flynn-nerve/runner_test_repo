@@ -19,10 +19,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-melodic-ros-base=1.4.1-0* \
     && rm -rf /var/lib/apt/lists/*
 
-ARG WORKSPACE=/tmp/WORKSPACE/src
-WORKDIR ${WORKSPACE}
-COPY . ${WORKSPACE}
+ARG WORKSPACE=/tmp/WORKSPACE/
+WORKDIR ${WORKSPACE}/src
+COPY . .
 
+WORKDIR ${WORKSPACE}
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
     apt-get update && rosdep install -y \
       --from-paths \
