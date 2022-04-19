@@ -1,5 +1,5 @@
 # Use Melodic version 
-FROM ros:melodic-ros-core-bionic
+FROM ros:melodic-ros-base
 
 # install bootstrap tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -20,10 +20,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-melodic-ros-base=1.4.1-0* \
     && rm -rf /var/lib/apt/lists/*
 
+
 ARG WORKSPACE=/tmp/WORKSPACE/
 
 WORKDIR ${WORKSPACE}/src
 WORKDIR ${WORKSPACE}
+RUN  bash -c "/opt/ros/$ROS_DISTRO/setup.sh"
+RUN bash -c "source /devel/setup.bash"
 RUN bash -c "source /opt/ros/melodic/setup.bash"
 RUN bash -c "catkin init"
 RUN bash -c "catkin build"
@@ -34,7 +37,7 @@ WORKDIR ${WORKSPACE}/src
 COPY . .
 
 RUN bash -c "ls -al ${WORKSPACE}"
-RUN bash -c "ls -al ${WORKSPACE}"
+RUN bash -c "ls -al ${WORKSPACE}/src"
 
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
     apt-get update && rosdep install -y \
