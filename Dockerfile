@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
     python-rosdep \
     python-rosinstall \
-    python-vcstools \
+    python-rosinstall-generator \
+    python-wstool \
     python-catkin-tools \
     && rm -rf /var/lib/apt/lists/*
 
@@ -23,11 +24,13 @@ ARG WORKSPACE=/tmp/WORKSPACE/
 WORKDIR ${WORKSPACE}/src
 COPY . .
 
-WORKDIR ${WORKSPACE}
+RUN bash -c "ls -al ${WORKSPACE}"
+RUN bash -c "ls -al ${WORKSPACE}"
+
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
     apt-get update && rosdep install -y \
       --from-paths \
-        /src/runner_test_pkg \
+        runner_test_pkg \
     && rm -rf /var/lib/apt/lists/*
 
 
