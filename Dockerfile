@@ -28,7 +28,9 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
 ARG WORKSPACE=/tmp/WORKSPACE/src
 WORKDIR ${WORKSPACE}
 
+RUN catkin init
+RUN  source /devel/setup.bash
+RUN catkin build
 
-ENTRYPOINT ["setup.sh"]
 
 
