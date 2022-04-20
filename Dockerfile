@@ -22,7 +22,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 
 # bootstrap rosdep
-RUN rosdep update --rosdistro $ROS_DISTRO  \
+RUN rosdep init \
+&& rosdep update --rosdistro $ROS_DISTRO  \
 && rosdep fix-permissions\
 && rosdep update
 
