@@ -3,7 +3,7 @@ FROM ros:melodic-ros-core-bionic
 
 SHELL [ "/bin/bash" , "-c" ]
 
-# Install all setup deps
+# Install all basic deps
 RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
     ros-melodic-catkin \
@@ -12,12 +12,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python-rosinstall-generator \
     python-wstool \
     python-catkin-tools \
-    python-catkin-pkg \
-    cmake \
-    python-empy \
-    python-nose \
-    python-setuptools \
-    libgtest-dev \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -49,6 +43,8 @@ RUN source /opt/ros/melodic/setup.bash \
  && cd /home/catkin_ws \
  && catkin build
 
+
+#### TEST APPLICATION ##########################
 # Copy Code into src workspace 
 WORKDIR /home/catkin_ws/src
 COPY . .
